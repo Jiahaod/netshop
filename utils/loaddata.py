@@ -45,6 +45,10 @@ def test_model():
 
 def deleteall():
     Category.objects.filter().delete()
+
+
+
+
     Color.objects.filter().delete()
     Size.objects.filter().delete()
 
