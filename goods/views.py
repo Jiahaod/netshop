@@ -15,5 +15,5 @@ class IndexView(View):
         #所有类别
         categorys = Category.objects.all().order_by('id')
         #该类别的东西
-        Goods.objects.filter(category_id = cid)
-        return render(request, 'index.html')
+        goodList = Goods.objects.filter(category_id = cid).order_by('id')
+        return render(request, 'index.html', {'categorys':categorys, 'goodList':goodList, 'cid':cid})
