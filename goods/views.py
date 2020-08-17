@@ -40,3 +40,13 @@ class IndexView(View):
 
         pagelist = range(begin, end+1)
         return render(request, 'index.html', {'categorys':categorys, 'goodsList':page_goodsList,'currentCid':cid,'pagelist':pagelist,'currentNum':num})
+
+
+class DetailView(View):
+    def get(self, request, goodsid):
+        goodsid = int(goodsid)
+
+        #查询goodsid查询商品内容
+        goods = Goods.object.get(goods_id = goodsid)
+
+        return render(request, 'detail.html', {'goods':goods})

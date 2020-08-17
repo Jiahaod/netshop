@@ -19,6 +19,15 @@ class Goods(models.Model):
     def getImg(self):
         return self.inventory_set.first().color.colorurl
 
+    def getColors(self):
+        colorList = []
+        for inventory in self.inventory_set.all():
+            color = inventory.color
+            if color not in colorList:
+                colorList.append(color)
+
+
+        return colorList
 
 class GoodsDetailName(models.Model):
     gdname = models.CharField(max_length=30)
