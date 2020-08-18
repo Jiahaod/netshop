@@ -29,6 +29,29 @@ class Goods(models.Model):
 
         return colorList
 
+    def getSizeList(self):
+        sizeList = []
+        for inventory in self.inventory_set.all():
+            size = inventory.size
+            if size not in sizeList:
+                sizeList.append(size)
+
+        return sizeList
+
+    def getDetailList(self):
+        import collections
+        datas = collections.OrderedDict()
+
+        for goodsdetail in self.goodsdetail_set.all():
+            # 创建一个有序字典用于存放详情信息（key:详情名称value:图片列表）
+            gdname = goodsdetail.name()
+            if gdname not in datas:
+                datas[gdname] = [goodsdetail.gdurl]
+            else:
+                datas[gdname].append(goodsdetail.gdurl)
+
+
+
 class GoodsDetailName(models.Model):
     gdname = models.CharField(max_length=30)
 
@@ -40,6 +63,9 @@ class GoodsDetail(models.Model):
     gdname = models.ForeignKey(GoodsDetailName,on_delete=models.CASCADE)
     goods = models.ForeignKey(Goods,on_delete=models.CASCADE)
 
+    # 获取详情名称
+    def name(self):
+        return self.gdname.gdname
 
 class Size(models.Model):
     sname = models.CharField(max_length=10)

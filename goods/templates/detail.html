@@ -26,7 +26,7 @@
         <!-- detail-content -->
         <div class="detail-content">
             <div class="detail-con-left">
-                <img id="rightimg" src="{{ goods.getGImg }}">
+                <img id="rightimg" src="{{ goods.getImg }}">
             </div>
             <div class="detail-con-right">
                 <h3>{{ goods.gdesc }}</h3>
@@ -67,7 +67,7 @@
                     <input type="number" name="" value="1">
                     <div class="jia">+</div>
                 </div>
-              <form action="http://127.0.0.1:8000/cart/" method="post">
+                <form action="http://127.0.0.1:8000/cart/" method="post">
                     <input name="colorid" type="hidden">
                     <input name="goodsid" type="hidden" value="4">
                     <input name="sizeid" type="hidden">
@@ -75,41 +75,37 @@
                     <input name="type" value="add" type="hidden">
                     <input type="hidden" name="csrfmiddlewaretoken" value="QYciumFpuMt1tAzw4HyUsSbgralhP9ykf6fRRkLbNhqtrzI6FElzKnFZdIenh6pT">
                     <button class="male" onclick="goCart()">单独购买</button>
-              </form>
+                </form>
             </div>
-         <div class="detail-con-nav">
-        <ul class="detail-nav">
-            <li class="active nav-item "><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">商品详情</a></li>
-            <li class="nav-item"><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">物流与售后</a></li>
-            <li class="nav-item"><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">消费保障</a></li>
-            <li class="nav-item"><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">手机购买</a></li>
-        </ul>
-    </div>
-    <div class="sub-nav">
-        <ul class="subNav">
-            <li><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">整体款式</a></li>
-            <li><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">模特实拍</a></li>
-            <li><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">细节做工</a></li>
-        </ul>
-    </div>
-    <div class="zhanshi">
+            <div class="detail-con-nav">
+                <ul class="detail-nav">
+                    <li class="active nav-item "><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">商品详情</a></li>
+                    <li class="nav-item"><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">物流与售后</a></li>
+                    <li class="nav-item"><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">消费保障</a></li>
+                    <li class="nav-item"><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">手机购买</a></li>
+                </ul>
+            </div>
+            <div class="sub-nav">
+                <ul class="subNav">
+                    <li><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">整体款式</a></li>
+                    <li><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">模特实拍</a></li>
+                    <li><a href="http://127.0.0.1:8000/goodsdetails/?goodsid=26#">细节做工</a></li>
+                </ul>
+            </div>
+            <div class="zhanshi">
 
-        {% for gdname,gdurlList in goods.getDetailList.items %}
-
-
-            <div class="zhanshi-model">
-                <p>{{ gdname }}</p>
-                <div class="line"></div>
-                {% for gdurl in gdurlList %}
-                    <img src="{{ gdurl }}" alt="">
+                {% for gdname,gdurlList in goods.getDetailList.items %}
+                <div class="zhanshi-model">
+                    <p>{{ gdname }}</p>
+                    <div class="line"></div>
+                    {% for gdurl in gdurlList %}
+                        <img src="{{ gdurl }}" alt="">
+                    {% endfor %}
+                </div>
                 {% endfor %}
-
             </div>
-
-        {% endfor %}
         </div>
     </div>
-        </div>
     <div class="goods-model" style="margin-right: -18px;text-align: center">
         <img src="./首页_files/recommend.png" style="position: relative;left: -10px;top: 10px">
         <div class="goods-content">
