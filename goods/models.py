@@ -50,7 +50,7 @@ class Goods(models.Model):
             else:
                 datas[gdname].append(goodsdetail.gdurl)
 
-
+        return datas
 
 class GoodsDetailName(models.Model):
     gdname = models.CharField(max_length=30)

@@ -95,13 +95,13 @@
             <div class="zhanshi">
 
                 {% for gdname,gdurlList in goods.getDetailList.items %}
-                <div class="zhanshi-model">
-                    <p>{{ gdname }}</p>
-                    <div class="line"></div>
-                    {% for gdurl in gdurlList %}
-                        <img src="{{ gdurl }}" alt="">
-                    {% endfor %}
-                </div>
+                    <div class="zhanshi-model">
+                        <p>{{ gdname }}</p>
+                        <div class="line"></div>
+                        {% for gdurl in gdurlList %}
+                            <img src="{{ gdurl }}" alt="">
+                        {% endfor %}
+                    </div>
                 {% endfor %}
             </div>
         </div>
