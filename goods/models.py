@@ -6,6 +6,7 @@ class Category(models.Model):
     def __str__(self):
         return u'Category:%s'%self.cname
 
+
 class Goods(models.Model):
     gname = models.CharField(max_length=100)
     gdesc = models.CharField(max_length=100)
@@ -16,10 +17,11 @@ class Goods(models.Model):
     def __str__(self):
         return u'Goods:%s'%self.gname
 
+
     def getImg(self):
         return self.inventory_set.first().color.colorurl
 
-    def getColors(self):
+    def getColorList(self):
         colorList = []
         for inventory in self.inventory_set.all():
             color = inventory.color
@@ -41,6 +43,7 @@ class Goods(models.Model):
     def getDetailList(self):
         import collections
         datas = collections.OrderedDict()
+
 
         for goodsdetail in self.goodsdetail_set.all():
             # 创建一个有序字典用于存放详情信息（key:详情名称value:图片列表）
