@@ -21,7 +21,8 @@ from netshop.settings import MEDIA_ROOT, DEBUG
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('goods.urls'))
+    path('', include('goods.urls')),
+    path('user/', include('userapp.urls'))
 ]
 
 if DEBUG:

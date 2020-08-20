@@ -26,3 +26,13 @@ class UserInfo(models.Model):
 
     def __str__(self):
         return u'UserInfo:%s'%self.uname
+
+class Address(models.Model):
+    aname = models.CharField(max_length=30)
+    aphone = models.CharField(max_length=11)
+    addr = models.CharField(max_length=100)
+    isdefault = models.BooleanField(default=False)
+    userinfo = models.ForeignKey(UserInfo, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return u'Address:%s'%self.aname
