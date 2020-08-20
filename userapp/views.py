@@ -1,4 +1,4 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 
@@ -19,9 +19,11 @@ class RegisterView(View):
 
         user = UserInfo.objects.create(uname=uname, pwd=pwd)
         if user:
+            #将用户信息存放到session对象中
+            request.session['user'] = user
+            return HttpResponseRedirect('/user/center/')
 
-            return HttpResponse('注册成功')
-        return HttpResponse('注册失败')
+        return HttpResponseRedirect('/user/register/')
 
 
 class CheckUnameView(View):
@@ -35,3 +37,7 @@ class CheckUnameView(View):
             flag = True
 
         return JsonResponse({'flag':flag})
+
+class CenterView(View):
+    def get(self,request):
+        return render(request,'center.html')
