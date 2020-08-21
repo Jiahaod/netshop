@@ -4,7 +4,7 @@
 
 {% block main %}
 
-    
+    {% csrf_token %}
     <div class="Bott">
 			<div class="wrapper clearfix" style="margin: 0 auto">
 				<div class="zuo fl" style="margin-left: 100px">
@@ -60,18 +60,23 @@
 
 
 {% block footerjs %}
-    
-    
+
+
     <script>
-    
+
         $('.logout').click(function () {
-    
+
             $.ajax({
                 type:'post',
                 url:'/user/logout/',
                 data:'csrfmiddlewaretoken='+$('input[name="csrfmiddlewaretoken"]').val(),
-                success:function(data){
-                    window.location='/user/login/'
+                success:function(result){
+
+
+                    if(result.delflag){
+                        window.location.href='/user/login/'
+                    }
+
                 }
             })
         })
