@@ -1,3 +1,4 @@
+from django.core.serializers import serialize
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -5,7 +6,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views import View
-from userapp.models import UserInfo
+from userapp.models import UserInfo, Area
 from utils.code import gene_code
 
 
@@ -89,3 +90,22 @@ class CheckCodeView(View):
         flag = code == sessionCode
 
         return JsonResponse({'checkFlag':flag})
+
+
+class AddressView(View):
+    def get(self, request):
+        return render(request, 'address.html')
+
+
+class LoadAreaView(View):
+    def get(self, request):
+        #获取请求参数
+        pid = request.GET.get('pid', -1)
+        pid = int(pid)
+        # 根据父id查询区划信息
+        areaList = Area.objects.filter(parentid=pid)
+
+        # 进行序列化
+        jareaList = serialize('json', areaList)
+
+        return JsonResponse({'jareaList': jareaList})

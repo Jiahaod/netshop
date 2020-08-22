@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'^login/$', views.LoginView.as_view()),
     url(r'^loadCode.jpg$',views.LoadCodeView.as_view()),
     url(r'^checkcode/$',views.CheckCodeView.as_view()),
+    url(r'^address/$', views.AddressView.as_view()),
+    url(r'^loadArea/$', views.LoadAreaView.as_view())
 ]
