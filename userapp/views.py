@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views import View
-from userapp.models import UserInfo, Area
+from userapp.models import UserInfo, Area, Address
 from utils.code import gene_code
 
 
@@ -94,7 +94,22 @@ class CheckCodeView(View):
 
 class AddressView(View):
     def get(self, request):
-        return render(request, 'address.html')
+        user = request.session.get('user', '')
+        # 获取当前登录用户的所有收货地址
+        addrList = user.address_set.all()
+
+        return render(request, 'address.html', {'addrList': addrList})
+
+    def post(self, request):
+        #获取请求参数
+        aname = request.POST.get('aname', '')
+        aphone = request.POST.get('aphone', '')
+        addr = request.POST.get('addr', '')
+        user = request.session.get('user', '')
+
+        address = Address.objects.create(aname=aname, aphone=aphone, addr=addr,isdefault=(lambda count: True if count == 0 else False)(user.address_set.all().count()),userinfo=user)
+        addrList = user.address_set.all()
+        return render(request, 'address.html', {'addrList':addrList})
 
 
 class LoadAreaView(View):
