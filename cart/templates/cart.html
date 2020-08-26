@@ -100,7 +100,7 @@
         $('.plus').click(function(event){
             <!--将数据同步到服务器-->
             var csrfmiddlewaretoken = $('input[name="csrfmiddlewaretoken"]').val()
-            var goodsid = $(this).attr('goodsid')
+            var goodsid = $(this).attr('goodsid')       //获取值
             var colorid = $(this).attr('colorid')
             var sizeid = $(this).attr('sizeid')
 
@@ -110,7 +110,7 @@
                 colorid:colorid,
                 sizeid:sizeid,
                 csrfmiddlewaretoken:csrfmiddlewaretoken,
-                type:'plus'
+                flag:'plus'
             }
             $.ajax({
                 async:false,
@@ -144,7 +144,7 @@
                 colorid:colorid,
                 sizeid:sizeid,
                 csrfmiddlewaretoken:csrfmiddlewaretoken,
-                type:'minus'
+                flag:'minus'
             }
 
             $.ajax({
@@ -182,7 +182,7 @@
                 colorid:colorid,
                 sizeid:sizeid,
                 csrfmiddlewaretoken:csrfmiddlewaretoken,
-                type:'delete'
+                flag:'delete'
             }
 
             $.ajax({

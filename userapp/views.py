@@ -6,6 +6,8 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views import View
+
+from cart.cartmanager import SessionCartManager
 from userapp.models import UserInfo, Area, Address
 from utils.code import gene_code
 
@@ -55,8 +57,8 @@ class LogoutView(View):
 
 class LoginView(View):
     def get(self, request):
-
-        return render(request, 'login.html')
+        red = request.GET.get('redirct', '')
+        return render(request, 'login.html',{'redirect':red})
 
     def post(self, request):
         # 1.获取请求参数
@@ -65,9 +67,17 @@ class LoginView(View):
 
         # 2.查询数据库中是否存在
         userList = UserInfo.objects.filter(uname=uname, pwd=pwd)
+        red = request.POST.get('redirect', '')
+
 
         if userList:
             request.session['user'] = userList[0]
+            if red == 'cart':
+                # 将session中的购物项移动到数据库
+                SessionCartManager(request.session).migrateSession2DB()
+
+                return HttpResponseRedirect('/cart/queryAll/')
+
             return HttpResponseRedirect('/user/center/')
         return HttpResponseRedirect('/user/login/')
 
