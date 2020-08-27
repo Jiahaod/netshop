@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
-from cart import views
-from order.views import *
+
+from order import views
 
 
 urlpatterns=[
