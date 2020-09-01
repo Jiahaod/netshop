@@ -90,7 +90,7 @@
 					</div>
 					<!--------tips count---------------->
 					<div class="count tips">
-						<p><span class="fl">合计：</span><span class="fr">￥{{ totalPrice }}</span></p>
+						<p><span class="fl">合计：</span><span class="fr" id="totalPriceId">￥{{ totalPrice }}</span></p>
 					</div>
 					<!--<input type="button" name="" value="去支付"> -->
 					<a href="http://127.0.0.1:8000/order/order.html" id="pay" class="pay" onclick="javascript:void(0);">去支付</a>
@@ -114,6 +114,7 @@
 
     <script>
         $("#pay").click(function(){
+            //创建数组 用于 存放当前需要购买的商品
             var cartitems = []
 
             $.each($('.msg ul'),function(index,item){
@@ -127,10 +128,10 @@
 
 
             //拼接请求参数
-            var params = 'address=1&payway='+$('.way .on').attr('name')+'&cartitems='+JSON.stringify(cartitems)
+            var params = 'address={{ address.id }}&payway='+$('.way .on').attr('name')+'&cartitems='+JSON.stringify(cartitems)+'&totalPrice='+$('#totalPriceId').html();
 
             //拼接请求地址
-            var url = '/order/toorder/?'+params
+            var url = '/order/topay/?'+params
 
             $(this).attr('href',url)
 
